@@ -2,95 +2,105 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Discord Nitro Drop – May 2025</title>
+  <title>Discord Nitro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="https://cdn.discordapp.com/attachments/829209672411054120/1117100207022006272/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="https://cdn.discordapp.com/icons/1108974620281583737/75841dfe516dc6c7b9a6ba57748c28e7.webp" type="image/png">
   <style>
-    :root {
-      --bg: #2C2F33;
-      --card: #23272A;
-      --accent: #7289DA;
-      --text: #FFFFFF;
-      --subtext: #B9BBBE;
-      --btn-bg: #5865F2;
-      --btn-hover: #4752C4;
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #2f3136;
+      color: #fff;
+      text-align: center;
+      display: none;
     }
-    *, *:before, *:after { box-sizing: border-box; }
-    body, html {
-      margin: 0; padding: 0;
-      height: 100%; font-family: 'Segoe UI', sans-serif;
-      background: var(--bg); color: var(--text);
-      display: flex; align-items: center; justify-content: center;
+    header {
+      background-color: #202225;
+      padding: 30px 20px;
     }
-    .warning, .container {
-      width: 90%; max-width: 600px;
-      padding: 30px; border-radius: 8px;
-      text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-    }
-    .warning {
-      background: var(--card); display: none;
+    header h1 {
+      color: #7289da;
+      font-size: 2em;
+      margin: 0;
     }
     .container {
-      background: var(--card);
+      margin: 50px auto;
+      max-width: 400px;
+      padding: 20px;
+      background-color: #36393f;
+      border-radius: 8px;
     }
-    h1 {
-      color: var(--accent); margin-bottom: 20px; font-size: 1.8em;
+    .nitro-logo {
+      width: 100px;
+      margin-bottom: 20px;
     }
-    p { color: var(--subtext); line-height: 1.5; }
-    .fake-code {
-      background: #2F3136; padding: 12px;
-      font-family: monospace; font-size: 1.2em;
-      border-radius: 5px; margin: 20px 0;
-      color: #43B581; filter: blur(6px);
-      transition: filter .3s, text-shadow .3s;
-      text-shadow: 0 0 8px rgba(255,255,255,0.5);
+    h2 {
+      margin-top: 0;
+      color: #fff;
     }
-    .loaded .fake-code { filter: none; text-shadow: none; }
-    .btn, .warning-btn {
-      display: inline-block; margin-top: 25px;
-      background: var(--btn-bg); color: var(--text);
-      padding: 14px 32px; font-size: 1em;
-      border: none; border-radius: 6px;
-      text-decoration: none; transition: background .3s;
+    p {
+      font-size: 0.95em;
+      color: #b9bbbe;
     }
-    .btn:hover, .warning-btn:hover { background: var(--btn-hover); }
-    .btn { display: none; }
-    .loading { color: var(--subtext); margin-top: 20px; }
+    .code-box {
+      background-color: #202225;
+      padding: 14px;
+      border-radius: 6px;
+      margin: 20px auto;
+      font-size: 0.9em;
+      word-break: break-all;
+      user-select: all;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #5865f2;
+      color: #fff;
+      padding: 12px 22px;
+      font-size: 1em;
+      border: none;
+      border-radius: 4px;
+      margin-top: 15px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #4752c4;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.8em;
+      color: #72767d;
+    }
+    @media only screen and (max-width: 768px) {
+      body {
+        display: block;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Desktop warning -->
-  <div class="warning" id="warning">
-    <h1>⚠️ Mobile Only</h1>
-    <p>This Nitro claim page only works on mobile devices.<br>
-       Please open this link on your phone to continue.</p>
-    <a class="warning-btn" href="https://ligmanutsackonatree.github.io/discordpromo/" target="_blank">Try anyway</a>
+  <header>
+    <h1>Discord Nitro Promo</h1>
+  </header>
+  <div class="container">
+    <img class="nitro-logo" src="https://cdn.discordapp.com/emojis/1052780891307759746.webp?size=96&quality=lossless" alt="Nitro Logo">
+    <h2>Your Gift Link</h2>
+    <p>To redeem, copy and paste into your Discord browser.</p>
+    <div class="code-box" id="giftCode">https://discord.gift/BZ4kNgsyuRjTq7LC</div>
+    <button class="btn" onclick="copyCode()">Copy Code</button>
+    <a class="btn" href="https://www.cpagrip.com/view.php?id=1809897">Continue</a>
   </div>
-
-  <!-- Actual bait container -->
-  <div class="container" id="container">
-    <img src="https://cdn.discordapp.com/emojis/949763033151062016.webp?size=96&quality=lossless"
-         alt="Discord Nitro" style="width:80px;margin-bottom:20px;">
-    <h1>🎁 Discord Nitro Gift Generator</h1>
-    <p>Generating your Nitro gift link...</p>
-    <div class="fake-code" id="code">https://discord.gift/9G8FQ2D7L5HTXMNR</div>
-    <div class="loading" id="loading">Verifying authenticity...</div>
-    <a class="btn" id="btn" href="#" target="_blank">Verify to Unlock</a>
-  </div>
-
+  <footer>
+    © 2025 Discord Inc.
+  </footer>
   <script>
-    const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    if (!isMobile) {
-      document.getElementById('container').style.display = 'none';
-      document.getElementById('warning').style.display = 'block';
-    } else {
-      setTimeout(() => {
-        document.getElementById('container').classList.add('loaded');
-        document.getElementById('loading').innerText = 'Verification Required';
-        const btn = document.getElementById('btn');
-        btn.href = 'https://www.cpagrip.com/view.php?id=1809897';
-        btn.style.display = 'inline-block';
-      }, 3500);
+    function copyCode() {
+      const code = document.getElementById("giftCode").innerText;
+      navigator.clipboard.writeText(code);
+      alert("Gift link copied to clipboard.");
+    }
+    if (window.innerWidth > 768) {
+      document.body.innerHTML = "<div style='color:#fff;text-align:center;padding:50px;font-family:Segoe UI'>Mobile only. Please open this link on your phone.</div>";
     }
   </script>
 </body>
